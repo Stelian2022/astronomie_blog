@@ -22,18 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
     }
 
     // Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
-}
-// Check if file already exists
-if (file_exists($target_file)) {
-    echo "Sorry, file already exists.";
-    $uploadOk = 0;
-}
+    if ($_FILES["image"]["size"] > 500000) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        echo "Sorry, file already exists.";
+        $uploadOk = 0;
+    }
     move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
     $titre = cleanData($_POST['titre']);
-    $image = "./uploads/" . $imageName;
+    $image = "./uploads/".$imageName;
     $contenu = cleanData($_POST['contenu']);
 
     insertArticle($titre, $contenu, $image, $_SESSION['id_utilisateur']);

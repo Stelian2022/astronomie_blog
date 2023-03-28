@@ -19,6 +19,7 @@
       <header class="header">
          <h1>Gestion des articles</h1>
          <p><a href="../" role="button">Voir Blog</a></p>
+        
          <p><a href="./ajout.php" role="button">Ajouter un article</a></p>
          <p><a href="../login/deconnexion.php" role="button">Deconnexion</a></p>
       </header>

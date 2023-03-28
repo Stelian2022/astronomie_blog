@@ -7,5 +7,5 @@ include '../inc/fonctions.php';
 
 $limit = 10;
 $offset = 0;
-
+(isAdminLogin()) ?: redirectUrl('view/404.php');
 require '../view/adminBlog/index.view.php';

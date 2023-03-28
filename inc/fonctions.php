@@ -103,12 +103,22 @@ function insertArticle(string $titre, string $contenu, string $image, int $id_ut
 function updateArticle(int $id_article, string $titre, string $contenu, string $image): bool
 {
    require 'pdo.php';
-   $requete = 'UPDATE article SET titre = :titre, contenu = :contenu,image = :image WHERE id_article = :id_article';
+
+   if ($image):
+      $requete = 'UPDATE article SET titre = :titre, contenu = :contenu,image = :image WHERE id_article = :id_article';
+   else:
+      $requete = 'UPDATE article SET titre = :titre, contenu = :contenu WHERE id_article = :id_article';
+   endif;
+
    $resultat = $conn->prepare($requete);
    $resultat->bindValue(':id_article', $id_article, PDO::PARAM_INT);
    $resultat->bindValue(':titre', $titre, PDO::PARAM_STR);
    $resultat->bindValue(':contenu', $contenu, PDO::PARAM_STR);
-   $resultat->bindValue(':image', $image, PDO::PARAM_STR);
+   
+   if ($image):
+      $resultat->bindValue(':image', $image, PDO::PARAM_STR);
+   endif;
+   
    $resultat->execute();
    return $resultat->execute();
 }
@@ -172,4 +182,13 @@ function redirectUrl(string $path = ''): void
    $homeUrl .= '/'. $path;
    header("Location: {$homeUrl}");
    exit();
+}
+
+function isAdminLogin(): bool
+{
+   if (isset($_SESSION['login']) && $_SESSION['login'] == "admin") :
+      return true;
+   else :
+      return false;
+   endif;
 }

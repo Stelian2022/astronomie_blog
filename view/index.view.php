@@ -21,13 +21,14 @@
             <h1>Blog Astronomie</h1>
             <p>
                 <?php if (isUserLogin()) : ?>
-                          <a href="./adminBlog/ajout.php" role="button">Ajouter un article</a>
-                          <a href="./login/deconnexion.php" role="button">Se déconnecter</a>
-                <?php else: ?>
-                          <a href="./login/" role="button">Se connecter</a>
-                          <a href="./register/" role="button">S'enregistrer</a>
-                <?php endif ?>
-            </p>
+            <a href="./adminBlog" role="button">Admin</a>
+            <a href="./adminBlog/ajout.php" role="button">Ajouter un article</a> 
+            <a href="./login/deconnexion.php" role="button">Se déconnecter</a>
+        <?php else : ?>
+            <a href="./login/" role="button">Se connecter</a>
+            <a href="./register/" role="button">S'enregistrer</a>
+        <?php endif ?>
+        </p>
         </header>
         <section>
             <?php
