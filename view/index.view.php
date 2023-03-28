@@ -35,8 +35,10 @@
                 foreach (getArticleLimit($limit, $offset) as $article) : ?>
                     <article>
                         <h4><?= $article['titre'] ?></h4>
-                        <?php if ($article['image_url'] != null) : ?>
-                            <p><img src="<?= $article['image_url'] ?>"></p>
+                        <p><?= $article['created_at'] ?></p>
+                        <p>Ecrit par <?= $article['nom']  ?> <?= $article['prenom']  ?> </p>
+                        <?php if ($article['image'] != null) : ?>
+                            <p><img src="<?= $article['image'] ?>"></p>
                         <?php endif; ?>
                         <p><?= $article['contenu'] ?></p>
                     </article>

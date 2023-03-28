@@ -48,8 +48,19 @@ function isGetIdValid(): bool
 
 function getArticleLimit(int $limit, int $offset): array
 {
+   // require 'pdo.php';
+   // $sqlRequest = "SELECT * FROM article ORDER BY id_article DESC LIMIT :limit OFFSET :offset";
+   // $resultat = $conn->prepare($sqlRequest);
+   // $resultat->bindValue(':limit', $limit, PDO::PARAM_INT);
+   // $resultat->bindValue(':offset', $offset, PDO::PARAM_INT);
+   // $resultat->execute();
+   // return $resultat->fetchAll();
    require 'pdo.php';
-   $sqlRequest = "SELECT * FROM article ORDER BY id_article DESC LIMIT :limit OFFSET :offset";
+   $sqlRequest = "SELECT a.*, u.*
+  FROM article AS a
+  INNER JOIN utilisateur AS u ON a.id_utilisateur = u.id_utilisateur
+  ORDER BY a.id_utilisateur ASC
+  LIMIT :limit OFFSET :offset";
    $resultat = $conn->prepare($sqlRequest);
    $resultat->bindValue(':limit', $limit, PDO::PARAM_INT);
    $resultat->bindValue(':offset', $offset, PDO::PARAM_INT);
@@ -76,28 +87,28 @@ function suppArticleById(int $idArticle): bool
    return $resultat->execute();
 }
 
-function insertArticle(string $titre, string $contenu, string $image_url, int $id_utilisateur): int
+function insertArticle(string $titre, string $contenu, string $image, int $id_utilisateur): int
 {
    require 'pdo.php';
-   $requete = 'INSERT INTO article (titre,contenu,image_url,id_utilisateur) VALUES (:titre, :contenu, :image_url, :id_utilisateur)';
+   $requete = 'INSERT INTO article (titre,contenu,image,id_utilisateur) VALUES (:titre, :contenu, :image, :id_utilisateur)';
    $resultat = $conn->prepare($requete);
    $resultat->bindValue(':titre', $titre, PDO::PARAM_STR);
    $resultat->bindValue(':contenu', $contenu, PDO::PARAM_STR);
-   $resultat->bindValue(':image_url', $image_url, PDO::PARAM_STR);
+   $resultat->bindValue(':image', $image, PDO::PARAM_STR);
    $resultat->bindValue(':id_utilisateur', $id_utilisateur, PDO::PARAM_STR);
    $resultat->execute();
    return $conn->lastInsertId();
 }
 
-function updateArticle(int $id_article, string $titre, string $contenu, string $image_url): bool
+function updateArticle(int $id_article, string $titre, string $contenu, string $image): bool
 {
    require 'pdo.php';
-   $requete = 'UPDATE article SET titre = :titre, contenu = :contenu,image_url = :image_url WHERE id_article = :id_article';
+   $requete = 'UPDATE article SET titre = :titre, contenu = :contenu,image = :image WHERE id_article = :id_article';
    $resultat = $conn->prepare($requete);
    $resultat->bindValue(':id_article', $id_article, PDO::PARAM_INT);
    $resultat->bindValue(':titre', $titre, PDO::PARAM_STR);
    $resultat->bindValue(':contenu', $contenu, PDO::PARAM_STR);
-   $resultat->bindValue(':image_url', $image_url, PDO::PARAM_STR);
+   $resultat->bindValue(':image', $image, PDO::PARAM_STR);
    $resultat->execute();
    return $resultat->execute();
 }

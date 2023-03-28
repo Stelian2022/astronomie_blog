@@ -33,7 +33,7 @@ CREATE TABLE `article` (
   `id_article` int(11) NOT NULL,
   `titre` varchar(255) DEFAULT NULL,
   `contenu` text DEFAULT NULL,
-  `image_url` varchar(500) DEFAULT NULL,
+  `image` varchar(500) DEFAULT NULL,
   `id_utilisateur` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `modified_at` datetime NOT NULL DEFAULT current_timestamp()

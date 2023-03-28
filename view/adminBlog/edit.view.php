@@ -23,8 +23,8 @@
                 <textarea name="contenu" id="contenu"><?= $contenuDb ?></textarea>
             </div>
             <div>
-                <label for="image_url">Image ULR</label>
-                <textarea name="image_url" id="image_url"><?= $imageUrlDb ?></textarea>
+            <label for="image">Image</label>
+                <input type="file" name="image" id="image">
             </div>
             <div>
                 <input type="submit" value="Valider">

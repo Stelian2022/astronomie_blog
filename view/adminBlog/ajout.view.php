@@ -12,7 +12,7 @@
 <body>
     <main class="container">
         <h1>Ajout d'un article</h1>
-        <form method="POST" class="form">
+        <form method="POST" enctype="multipart/form-data" class="form">
             <div>
                 <label for="titre">Titre article</label>
                 <input type="titre" name="titre" id="titre" value="<?= $titre ?>">
@@ -22,8 +22,8 @@
 <textarea name="contenu" id="contenu"><?= $contenu ?></textarea>
             </div>
             <div>
-                <label for="image_url">Image URL</label>
-                <input type="text" name="image_url" id="image_url" value="<?= $image_url ?>">
+                <label for="image">Image</label>
+                <input type="file" name="image" id="image">
             </div>
             <div>
                 <input type="submit" value="Ajouter">
